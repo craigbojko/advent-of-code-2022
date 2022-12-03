@@ -12,6 +12,8 @@ export default class FileReader {
   bufferPos: number = 0
   bytesInBuffer: number = 0
 
+  private debug: boolean = false
+
   constructor(filename: string, bufferSize: number = 10) {
     this.filename = filename
     this.bufferSize = bufferSize
@@ -94,7 +96,7 @@ export default class FileReader {
         const read = this.readIntoBuffer()
         // EOF
         if (read <= 0) {
-          console.log('EOF')
+          this.debug && console.debug('EOF')
           break
         }
       }
@@ -104,7 +106,7 @@ export default class FileReader {
       this.currentLine = line
       count += 1
       if (line && lines.length < numberOfLines && line !== '') {
-        console.log(line, this.buffer.toString())
+        this.debug && console.debug(line, this.buffer.toString())
         lines.push(line)
       }
       line = ''
