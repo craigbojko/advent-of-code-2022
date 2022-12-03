@@ -4,7 +4,7 @@ import data from '../helpers/data'
 const elvenCalorieCount: number[] = []
 
 const part1 = (): number => {
-  const file = data(1)
+  const file = data({ day: 1 })
 
   let highestCalorieCount = 0
   let elf: string[] = [];

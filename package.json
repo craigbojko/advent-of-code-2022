@@ -5,8 +5,9 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "start": "./node_modules/.bin/ts-node index.ts",
+    "start": "ts-node index.ts",
     "test": "jest --runInBand",
+    "solve": "ts-node ./scripts/create.ts",
     "fetch:input": "bash ./scripts/getData.sh"
   },
   "jest": {

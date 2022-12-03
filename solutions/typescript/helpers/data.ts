@@ -26,10 +26,18 @@ export const dataAsStringArray = (day: number): string[] => {
   return data.split('\n')
 }
 
-export default function data(day: number, part: number = 1): FileReader {
+export default function data({
+  day,
+  part = 1,
+  fileReaderOptions,
+}: {
+  day: number
+  part?: number
+  fileReaderOptions?: { bufferSize: number }
+}): FileReader {
   const file = path.resolve(dataDir(), `day${day}.txt`)
   if (fs.existsSync(file)) {
-    return new FileReader(file)
+    return new FileReader(file, fileReaderOptions?.bufferSize)
   }
 
   throw new Error(`Unable to find data file: ${file}`)

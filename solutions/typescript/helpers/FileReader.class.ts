@@ -12,8 +12,9 @@ export default class FileReader {
   bufferPos: number = 0
   bytesInBuffer: number = 0
 
-  constructor(filename: string) {
+  constructor(filename: string, bufferSize: number = 10) {
     this.filename = filename
+    this.bufferSize = bufferSize
     this.fd = fs.openSync(this.filename, 'r')
     this.buffer = Buffer.alloc(this.bufferSize)
     this.currentLine = null

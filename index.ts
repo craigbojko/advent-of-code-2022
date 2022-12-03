@@ -12,28 +12,28 @@
  * ------------------------------------
  */
 
-import { default as problem1 } from './solutions/typescript/1'
-// import { default as problem2 } from './2'
-// import { default as problem3 } from './3'
-
 export interface Solution {
   part1(): any;
   part2?(): any;
 }
 
-export const problems = [
-  problem1,
-  // problem2,
-  // problem3,
-]
+const problems: Record<number, Solution> = {}
 
-; (function main() {
+const loadProblem = async (day: number): Promise<Solution> => {
+  const problem = await import(`./solutions/typescript/${day}`)
+  problems[day] = problem.default
+  return problem.default
+}
+
+const run = async (): Promise<void> => {
   const args: string[] = process.argv
   const argc: string = args[2]
   if (argc) {
     const i: number = parseInt(argc)
-    if (problems[i - 1]) {
-      const solution: Solution = problems[i - 1]
+    await loadProblem(i)
+
+    if (problems[i]) {
+      const solution: Solution = problems[i]
       solution.part1()
       solution.part2 && solution.part2()
     } else {
@@ -44,4 +44,8 @@ export const problems = [
     console.warn(`You should provide the problem as an integer value: e.g. "yarn start 1"`)
     process.exit(1)
   }
-}())
+}
+
+if (require.main === module) {
+  run()
+}
