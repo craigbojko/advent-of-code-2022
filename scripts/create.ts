@@ -30,7 +30,7 @@ import type { Solution } from '../../../index'
 import data from '../helpers/data'
 
 const part1 = (): number => {
-  const file = data(${day})
+  const file = data({ day: ${day} })
 
   return 0
 }
